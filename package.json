@@ -1,0 +1,16 @@
+{
+  "name": "interview-genai",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/free-port.js 3000",
+    "dev": "node scripts/dev.js",
+    "dev:backend": "npm --prefix Backend run dev",
+    "dev:frontend": "npm --prefix Frontend/Interview-genai run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "@google/genai": "^2.6.0"
+  }
+}
