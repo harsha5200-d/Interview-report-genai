@@ -101,8 +101,8 @@ TARGET JOB DESCRIPTION:
 ${jobDescription.trim().substring(0, 8000)}
 
 REQUIREMENTS:
-- 3 technicalQuestions tailored to the job stack; answers should reflect the candidate's experience
-- 3 behavioralQuestions for this role level
+- 3 HIGHLY ACCURATE AND SPECIFIC technicalQuestions tailored exactly to the target job description's tech stack. Avoid generic questions; ask deep, scenario-based technical questions. The "answer" field MUST be highly detailed and incorporate the candidate's specific projects and tools from their profile.
+- 3 SPECIFIC behavioralQuestions tailored to the seniority of this role. Ask about real scenarios (e.g., debugging, conflict, architecture). The "answer" field MUST use the STAR method and draw concrete examples from the candidate's profile.
 - 2 skillGaps the candidate is missing for THIS job (severity: low | medium | high)
 - 4 preparationPlan days with 2-3 specific tasks each, targeting gaps and interview prep
 
@@ -119,7 +119,10 @@ Use this exact JSON structure:
     { "skill": "...", "severity": "medium" }
   ],
   "preparationPlan": [
-    { "day": 1, "tasks": ["...", "..."] }
+    { "day": 1, "tasks": ["...", "..."] },
+    { "day": 2, "tasks": ["...", "..."] },
+    { "day": 3, "tasks": ["...", "..."] },
+    { "day": 4, "tasks": ["...", "..."] }
   ]
 }
 `.trim();
@@ -139,6 +142,9 @@ function extractTopTechnologies(jobDescription) {
 
 function normalizeQuestion(item, fallbackPrefix, resume, selfDescription, jobDescription) {
     if (typeof item === "string") {
+        if (/^(question|intention|answer)$/i.test(item.trim()) || item.length < 15) {
+            return null; // Reject garbage array of keys so fallback logic takes over
+        }
         return {
             question: item,
             intention: `Assess ${fallbackPrefix} knowledge relevant to the role.`,
@@ -243,29 +249,54 @@ function normalizeReport(raw, resume, selfDescription, jobDescription) {
         .filter(Boolean)
         .slice(0, 2);
 
-    while (technicalQuestions.length < 3) {
-        technicalQuestions.push({
+    const fallbackTechs = [
+        {
             question: "Explain how you structure a REST API in Express.js for a MERN application.",
             intention: "Assess backend architecture and API design skills.",
-            answer:
-                "Describe routes, controllers, middleware, error handling, and how the API connects to MongoDB using the candidate's project experience.",
-        });
+            answer: "Describe routes, controllers, middleware, error handling, and how the API connects to MongoDB using the candidate's project experience.",
+        },
+        {
+            question: "How do you manage state in a complex React application?",
+            intention: "Assess front-end state management and performance optimization.",
+            answer: "Compare Context API vs Redux/Zustand, highlighting trade-offs with specific project examples.",
+        },
+        {
+            question: "Describe your strategy for optimizing MongoDB queries.",
+            intention: "Assess database performance tuning and indexing knowledge.",
+            answer: "Discuss using explain plans, creating proper indexes, and avoiding N+1 queries with aggregation pipelines.",
+        }
+    ];
+    while (technicalQuestions.length < 3) {
+        technicalQuestions.push(fallbackTechs[technicalQuestions.length]);
     }
 
-    while (behavioralQuestions.length < 3) {
-        behavioralQuestions.push({
+    const fallbackBehaviors = [
+        {
             question: "Tell me about a challenging bug you fixed in a full-stack project.",
             intention: "Assess debugging approach and ownership.",
-            answer:
-                "Use STAR format with a real MERN project example: problem, investigation, fix, and outcome.",
-        });
+            answer: "Use STAR format with a real MERN project example: problem, investigation, fix, and outcome.",
+        },
+        {
+            question: "Describe a time you had to learn a new technology quickly to deliver a feature.",
+            intention: "Assess adaptability and continuous learning.",
+            answer: "Focus on the learning process, how you applied it, and the successful delivery using STAR.",
+        },
+        {
+            question: "How do you handle disagreements on technical design with a teammate?",
+            intention: "Assess collaboration, communication, and conflict resolution.",
+            answer: "Highlight active listening, weighing pros/cons objectively, and reaching a consensus.",
+        }
+    ];
+    while (behavioralQuestions.length < 3) {
+        behavioralQuestions.push(fallbackBehaviors[behavioralQuestions.length]);
     }
 
+    const fallbackGaps = [
+        { skill: "Advanced system design for scalable MERN apps", severity: "medium" },
+        { skill: "Comprehensive Unit and Integration Testing", severity: "medium" }
+    ];
     while (skillGaps.length < 2) {
-        skillGaps.push({
-            skill: "Advanced system design for scalable MERN apps",
-            severity: "medium",
-        });
+        skillGaps.push(fallbackGaps[skillGaps.length]);
     }
 
     const preparationPlan = (parsed.preparationPlan || [])
@@ -287,14 +318,16 @@ function normalizeReport(raw, resume, selfDescription, jobDescription) {
         .filter(Boolean)
         .slice(0, 4);
 
+    const fallbackPlan = [
+        { day: 1, tasks: ["Review core MERN concepts and recent projects.", "Practice two technical questions out loud."] },
+        { day: 2, tasks: ["Deep-dive into one backend challenge (APIs, DB indexing).", "Mock interview: explain system design at high level."] },
+        { day: 3, tasks: ["Implement a small feature or bugfix related to the job tech stack.", "Write tests for critical paths."] },
+        { day: 4, tasks: ["Rehearse behavioral answers using STAR.", "Prepare questions to ask the interviewer."] }
+    ];
     while (preparationPlan.length < 4) {
-        const dayNum = preparationPlan.length + 1;
         preparationPlan.push({
-            day: dayNum,
-            tasks: [
-                `Review technical and behavioral questions from Day ${dayNum - 1 || 1}.`,
-                "Practice answering out loud with examples from your MERN projects.",
-            ],
+            day: preparationPlan.length + 1,
+            tasks: fallbackPlan[preparationPlan.length].tasks
         });
     }
 
