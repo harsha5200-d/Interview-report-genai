@@ -1,12 +1,4 @@
 require("dotenv").config();
-
-if (
-    process.env.GOOGLE_AI_TLS_INSECURE === "true" ||
-    process.env.MONGODB_TLS_INSECURE === "true"
-) {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-}
-
 const { GoogleGenAI } = require("@google/genai");
 const { z } = require("zod");
 const { zodToJsonSchema } = require("zod-to-json-schema");
@@ -307,7 +299,7 @@ function normalizeReport(raw, resume, selfDescription, jobDescription) {
     };
 }
 
-const MODELS = ["gemini-2.5-flash", "gemini-2.0-flash"];
+const MODELS = ["gemini-1.5-flash"];
 
 async function callGemini(prompt) {
     const ai = getClient();
