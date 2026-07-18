@@ -14,7 +14,6 @@
 
 <p align="center">
   <a href="https://interview-report-genai.vercel.app">🌐 Live Demo</a> •
-  <a href="https://github.com/harsha5200-d/Interview-report-genai">📂 Repository</a>
 </p>
 
 ---
@@ -60,11 +59,7 @@
 
 ---
 
-## 📸 Application Preview
 
-![Interview Report GenAI](./assets/preview.png)
-
----
 
 ## 🚀 Live Demo
 
