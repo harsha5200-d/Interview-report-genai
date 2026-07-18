@@ -321,7 +321,6 @@ async function callGemini(prompt) {
                 config: {
                     systemInstruction: SYSTEM_INSTRUCTION,
                     responseMimeType: "application/json",
-                    responseJsonSchema,
                     temperature: 0.35,
                     topP: 0.9,
                 },
