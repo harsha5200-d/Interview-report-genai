@@ -40,14 +40,14 @@ async function registerUserController(req, res) {
                 username: newuser.username,
             },
             process.env.JWT_SECRET,
-            { expiresIn: "3650d" }
+            { expiresIn: "14d" }
         )
 
         res.cookie("token", token, {
             httpOnly: true,
             sameSite: "lax",
             path: "/",
-            maxAge: 3650 * 24 * 60 * 60 * 1000,
+            maxAge: 14 * 24 * 60 * 60 * 1000,
         });
 
         res.status(201).json(
@@ -139,14 +139,14 @@ async function LoginUserController(req, res) {
                 username: user.username
             },
             process.env.JWT_SECRET,
-            { expiresIn: "3650d" }
+            { expiresIn: "14d" }
         );
 
         res.cookie("token", token, {
             httpOnly: true,
             sameSite: "lax",
             path: "/",
-            maxAge: 3650 * 24 * 60 * 60 * 1000,
+            maxAge: 14 * 24 * 60 * 60 * 1000,
         });
 
         res.status(200).json({
