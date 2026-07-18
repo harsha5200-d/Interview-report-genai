@@ -97,6 +97,31 @@ REQUIREMENTS:
 - 3 behavioralQuestions for this role level
 - 2 skillGaps the candidate is missing for THIS job (severity: low | medium | high)
 - 4 preparationPlan days with 2-3 specific tasks each, targeting gaps and interview prep
+
+Use this exact JSON structure (example):
+{
+  "matchscore": 85,
+  "technicalQuestions": [
+    { 
+      "question": "How do you handle state management in large React apps?",
+      "intention": "Assess architecture skills for React.",
+      "answer": "I use Redux Toolkit for global state and React Query for server state..." 
+    }
+  ],
+  "behavioralQuestions": [
+    { 
+      "question": "Tell me about a time you missed a deadline.",
+      "intention": "Assess accountability and communication.",
+      "answer": "In my last project, I informed the stakeholder early..." 
+    }
+  ],
+  "skillGaps": [
+    { "skill": "Docker deployment", "severity": "medium" }
+  ],
+  "preparationPlan": [
+    { "day": 1, "tasks": ["Review Docker fundamentals", "Deploy a sample Node app"] }
+  ]
+}
 `.trim();
 }
 
