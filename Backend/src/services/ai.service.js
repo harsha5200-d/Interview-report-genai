@@ -97,23 +97,6 @@ REQUIREMENTS:
 - 3 behavioralQuestions for this role level
 - 2 skillGaps the candidate is missing for THIS job (severity: low | medium | high)
 - 4 preparationPlan days with 2-3 specific tasks each, targeting gaps and interview prep
-
-Use this exact JSON structure:
-{
-  "matchscore": 82,
-  "technicalQuestions": [
-    { "question": "...", "intention": "...", "answer": "..." }
-  ],
-  "behavioralQuestions": [
-    { "question": "...", "intention": "...", "answer": "..." }
-  ],
-  "skillGaps": [
-    { "skill": "...", "severity": "medium" }
-  ],
-  "preparationPlan": [
-    { "day": 1, "tasks": ["...", "..."] }
-  ]
-}
 `.trim();
 }
 
@@ -146,21 +129,21 @@ function normalizeQuestion(item, fallbackPrefix, resume, selfDescription, jobDes
         // If question text is missing or generic, synthesize a better one from jobDescription
         const topTech = extractTopTechnologies(jobDescription)[0] || '';
         let question = qText && String(qText).trim();
-        if (!question || question.length < 8 || /question|intention/i.test(question)) {
+        if (!question || question === "question" || question === "...") {
             question = topTech
                 ? `Explain your experience with ${topTech} in production projects.`
                 : `${fallbackPrefix.charAt(0).toUpperCase() + fallbackPrefix.slice(1)} question: describe relevant experience and approach.`;
         }
 
         let intention = intentionText && String(intentionText).trim();
-        if (!intention || intention.length < 6 || /intention/i.test(intention)) {
+        if (!intention || intention === "intention" || intention === "...") {
             intention = topTech
                 ? `Assess candidate's practical ${topTech} skills and problem-solving approach.`
                 : `Evaluate ${fallbackPrefix} competency for this role.`;
         }
 
         let answer = answerText && String(answerText).trim();
-        if (!answer || answer.length < 10 || /Provide a structured answer/i.test(answer)) {
+        if (!answer || answer === "answer" || answer === "...") {
             // Build a concise model answer using available profile snippets
             const profileHint = (selfDescription || resume || '').slice(0, 300);
             answer = profileHint
@@ -299,7 +282,7 @@ function normalizeReport(raw, resume, selfDescription, jobDescription) {
     };
 }
 
-const MODELS = ["gemini-1.5-flash"];
+const MODELS = ["gemini-2.5-flash"];
 
 async function callGemini(prompt) {
     const ai = getClient();
