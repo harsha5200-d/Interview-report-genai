@@ -1,7 +1,7 @@
 # 🚀 Interview Report GenAI
 
 <p align="center">
-  <img src="./public/preview.png" alt="Interview Report GenAI" width="100%" />
+  <img src="preview1.png" alt="Interview Report GenAI" width="100%" />
 </p>
 
 <p align="center">
