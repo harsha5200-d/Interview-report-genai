@@ -120,7 +120,7 @@ npm run dev
 
 **Harsha Vardhan**
 
-GitHub: https://github.com/harsha5200-d
+GitHub: [https://github.com/harsha5200-d](https://github.com/harsha5200-d)
 
 ---
 
