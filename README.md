@@ -1,7 +1,7 @@
 # 🚀 Interview Report GenAI
 
 <p align="center">
-  <img src="./public/preview.png" alt="Interview Report GenAI" width="100%" />
+  <img src="preview1.png" alt="Interview Report GenAI" width="100%" />
 </p>
 
 <p align="center">
@@ -14,7 +14,6 @@
 
 <p align="center">
   <a href="https://interview-report-genai.vercel.app">🌐 Live Demo</a> •
-  <a href="https://github.com/harsha5200-d/Interview-report-genai">📂 Repository</a>
 </p>
 
 ---
@@ -60,11 +59,7 @@
 
 ---
 
-## 📸 Application Preview
 
-![Interview Report GenAI](./assets/preview.png)
-
----
 
 ## 🚀 Live Demo
 
@@ -120,10 +115,11 @@ npm run dev
 
 **Harsha Vardhan**
 
-GitHub: https://github.com/harsha5200-d
+GitHub: [https://github.com/harsha5200-d](https://github.com/harsha5200-d)
 
 ---
 
-## ⭐ Support
+## ⭐ Support & Feedback
 
 If you found this project useful, please give it a star on GitHub.
+

@@ -23,6 +23,7 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     background-color: $bg-page;
     color: $text-primary;
     font-family: $font-stack;
+    position: relative;
 
     display: flex;
     flex-direction: column;
@@ -30,11 +31,33 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     justify-content: center;
     padding: 3rem 1.5rem;
     gap: 2rem;
+    .logout-btn {
+        padding: 0.5rem 1.25rem;
+        background-color: transparent;
+        color: $text-muted;
+        border: 1px solid $border-color;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+
+        &:hover {
+            color: $text-primary;
+            border-color: $text-primary;
+            background-color: rgba(255,255,255,0.05);
+        }
+        &:active {
+            transform: scale(0.98);
+        }
+    }
 }
 
 // ── Page Header ──────────────────────────────────────────────────────────────
 .page-header {
-    text-align: center;
+    text-align: left;
+    width: 100%;
+    max-width: 900px;
 
     h1 {
         font-size: 2.25rem;
@@ -47,8 +70,8 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
         color: $text-muted;
         font-size: 0.95rem;
         max-width: 480px;
-        margin: 0 auto;
         line-height: 1.6;
+        margin: 0;
     }
 
     .highlight {

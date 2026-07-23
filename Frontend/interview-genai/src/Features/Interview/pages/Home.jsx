@@ -83,13 +83,13 @@ const Home = () => {
 
             {/* Page Header */}
             <header className='page-header'>
-                <div style={{display: 'flex', alignItems: 'center', width: '100%', gap: '20px'}}>
-                    <div>
-                        <button className='logout-btn' onClick={handleLogout} title='Logout'>Logout</button>
-                    </div>
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
                     <div>
                         <h1>Create Your Custom <span className='highlight'>Interview Plan</span></h1>
                         <p>Let our AI analyze the job requirements and your unique profile to build a winning strategy.</p>
+                    </div>
+                    <div>
+                        <button className='logout-btn' onClick={handleLogout} title='Logout'>Logout</button>
                     </div>
                 </div>
             </header>
